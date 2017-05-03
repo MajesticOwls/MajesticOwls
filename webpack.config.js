@@ -1,8 +1,8 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, 'react-client/src');
-var APP_DIR = path.resolve(__dirname, 'react-client/dist');
+var BUILD_DIR = path.resolve(__dirname, 'react-client/dis');
+var APP_DIR = path.resolve(__dirname, 'react-client/src');
 
 var config = {
   entry: APP_DIR + '/index.jsx',
