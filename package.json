@@ -1,9 +1,9 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
-  "license": "",
+  "name": "Majestic Owls Greenfield Project",
+  "version": "0.1",
+  "description": "Majestic Owls Greenfield Project",
+  "author": "The Majestic Owls",
+  "license": "WTFPL",
   "engines": {
     "node": ">=6.4.0"
   },
@@ -13,19 +13,14 @@
     "server-dev": "nodemon server/index.js",
     "start": "node server/index.js",
     "test": "mocha",
-    "db": "sudo mongod",
+    "db": "mongod",
     "heroku-postbuild": "webpack -p"
   },
   "dependencies": {
     "babel-loader": "^7.0.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "body-parser": "^1.17.1",
-    "chai": "^3.5.0",
     "express": "^4.15.2",
     "jquery": "^3.2.1",
     "mongoose": "^4.9.7",
-    "nodemon": "^1.11.0",
     "passport-google-oauth": "^1.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -33,11 +28,15 @@
     "webpack": "^2.4.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.7.5",
-    "babel-preset-es2015": "^6.6.0",
-    "babel-register": "^6.7.2",
+    "babel-cli": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.17.1",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "install": "^0.9.6",
+    "nodemon": "^1.11.0",
+    "chai": "^3.5.0",
     "mocha": "^3.3.0"
   },
   "babel": {
