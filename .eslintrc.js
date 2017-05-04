@@ -6,5 +6,12 @@
  */
 
 module.exports = {
-  extends: './node_modules/eslint-config-hackreactor/index.js'
+  extends: './node_modules/eslint-config-hackreactor/index.js',
+  rules: {
+    'constructor-super': 1,
+    'indent': [1, 2],
+    'no-var': 1
+  }
 };
+
+// Will probably add env variables for mocha/chai/etc in the future --RW
