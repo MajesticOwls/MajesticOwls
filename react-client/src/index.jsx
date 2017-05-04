@@ -3,29 +3,47 @@ import {render} from 'react-dom';
 import Search from './components/Search.jsx';
 import SignIn from './components/SignIn.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import {
   BrowserRouter as Router,
   Route,
   Link,
 } from 'react-router-dom'
 
-const signInStyle= {
-  top: 10,
-  right: 10,
-  left: 'auto',
-  bottom: 'auto',
-  position: 'fixed',
+const styles = {
+  titleStyle: {
+    top: 'auto',
+    right: 'auto',
+    left: 50,
+    bottom: 'auto',
+    position: 'fixed',
+  },
+  signInStyle: {
+    top:15,
+    right: 30,
+    left:'auto',
+    bottom: 'auto',
+    position:'fixed',
+  }
 }
+
 const Home = () => (
   <div>
     <div> 
-       <MuiThemeProvider>
-        <Link to='/sign-in'><RaisedButton 
-          label="Sign In" 
-          style = {signInStyle} 
-          primary={true}
-        /></Link>
+      <MuiThemeProvider>
+        <Toolbar>
+          <ToolbarGroup firstChild={true} style={styles.titleStyle}>
+            <ToolbarTitle text="Majestic Owls" />
+          </ToolbarGroup>
+          <ToolbarGroup style={styles.signInStyle}>
+            <Link to='/sign-in'>
+              <FlatButton 
+                label="Sign In"
+              />
+            </Link>
+          </ToolbarGroup>
+        </Toolbar>
       </MuiThemeProvider>
     </div>
   </div>
