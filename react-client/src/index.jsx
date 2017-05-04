@@ -7,24 +7,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.searchFlight = this.searchFlight.bind(this);
-    this.searchAddress = this.searchAddress.bind(this);
-    this.dropDownSelect = this.dropDownSelect.bind(this);
     this.state = { 
       trips: [],
     }
-  }
-
-  searchFlight (flight) {
-
-  }
-
-  searchAddress (address) {
-
-  }
-
-  dropDownSelect (trip) {
-
   }
 
 
