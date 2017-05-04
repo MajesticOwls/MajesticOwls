@@ -1,6 +1,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import Search from './components/Search.jsx';
+import SignIn from './components/SignIn.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import {
@@ -8,6 +9,7 @@ import {
   Route,
   Link,
 } from 'react-router-dom'
+
 const signInStyle= {
   top: 10,
   right: 10,
@@ -20,7 +22,9 @@ const Home = () => (
     <div> 
        <MuiThemeProvider>
         <Link to='/sign-in'><RaisedButton 
-          label="Sign In" style = {signInStyle} primary={true}
+          label="Sign In" 
+          style = {signInStyle} 
+          primary={true}
         /></Link>
       </MuiThemeProvider>
     </div>
@@ -33,46 +37,11 @@ const About = () => (
   </div>
 )
 
-const Topic = ({ match }) => (
-  <div>
-    <h3>{match.params.topicId}</h3>
-  </div>
-)
-
-const Topics = ({ match }) => (
-  <div>
-    <h2>Topics</h2>
-    <ul>
-      <li>
-        <Link to={`${match.url}/rendering`}>
-          Rendering with React
-        </Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/components`}>
-          Components
-        </Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/props-v-state`}>
-          Props v. State
-        </Link>
-      </li>
-    </ul>
-
-    <Route path={`${match.url}/:topicId`} component={Topic}/>
-    <Route exact path={match.url} render={() => (
-      <h3>Please select a topic.</h3>
-    )}/>
-  </div>
-)
-
 const App = () => (
   <Router>
     <div>
       <Route exact path="/" component={Home}/>
-      <Route path="/sign-in" component={About}/>
-      <Route path="/topics" component={Topics}/>
+      <Route path="/sign-in" component={SignIn}/>
     </div>
   </Router>
 )
