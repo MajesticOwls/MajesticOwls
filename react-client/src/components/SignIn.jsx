@@ -42,9 +42,9 @@ const SignIn = () => (
     </MuiThemeProvider>
     <div
       style = {styles.signInStyle} >
-      <GoogleButton 
-        onClick={() => { console.log('button clicked') }} 
-      />
+      <a href="/auth/google">
+        <GoogleButton />
+      </a>
     </div>
   </div>
 )
