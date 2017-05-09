@@ -13,9 +13,9 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 // Passport/Auth
 
 passport.use(new GoogleStrategy({
-    clientID: process.env.G_ID,
-    clientSecret: process.env.G_SECRET,
-    callbackURL: process.env.G_URL
+    clientID: process.env.G_ID || require('./config').G_ID,
+    clientSecret: process.env.G_SECRET || require('./config').G_SECRET,
+    callbackURL: process.env.G_URL || 'http://localhost:1337/auth/google/callback'
   },
   (accessToken, refreshToken, profile, done) => {
     User.findOrCreate({ googleId: profile.id }, (err, user) => {
@@ -34,7 +34,7 @@ passport.deserializeUser((id, done) => {
 
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(session({ secret: process.env.SESSION_SECRET }));
+app.use(session({ secret: process.env.SESSION_SECRET || require('./config').SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
 
