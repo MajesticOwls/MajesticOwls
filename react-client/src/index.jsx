@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Search from './components/Search.jsx';
 import SignIn from './components/SignIn.jsx';
 import DashBoard from './components/DashBoard.jsx';
+
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
@@ -44,33 +46,29 @@ class App extends React.Component {
 
     const Home = () => (
       <div>
-        <div> 
-          <MuiThemeProvider>
-            <Toolbar
-              style = {styles.toolbarStyle}>
-              <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-                <ToolbarTitle text="Majestic Owls" />
-              </ToolbarGroup>
-              <ToolbarGroup style={styles.signInStyle}>
-                <Link to='/sign-in'>
-                  <FlatButton 
-                    label="Sign In"
-                  />
-                </Link>
-              </ToolbarGroup>
-            </Toolbar>
-          </MuiThemeProvider>
-        </div>
+        <MuiThemeProvider>
+          <Toolbar
+            style = {styles.toolbarStyle}>
+            <ToolbarGroup firstChild={true} style={styles.titleStyle}>
+              <ToolbarTitle text="Majestic Owls" />
+            </ToolbarGroup>
+            <ToolbarGroup style={styles.signInStyle}>
+              <Link to='/sign-in'>
+                <FlatButton 
+                  label="Sign In"
+                />
+              </Link>
+            </ToolbarGroup>
+          </Toolbar>
+        </MuiThemeProvider>
       </div>
     )
 
     return (
       <Router>
-        <div>
-          <Route exact path="/" component={Home}/>
-          <Route path="/sign-in" component={SignIn}/>
-          <Route path="/dashboard" component={DashBoard}/>
-        </div>
+        <Route exact path="/" component={Home}/>
+        <Route path="/sign-in" component={SignIn}/>
+        <Route path="/dashboard" component={DashBoard}/>
       </Router>
     )
   }
