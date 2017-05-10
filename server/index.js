@@ -54,7 +54,7 @@ app.get('/auth/google/callback',
 
 
 //FOR ADDING DATA INTO THE DATEBASE
-app.post('/datebase/save', (req,res) => {
+app.post('/database/save', (req,res) => {
 
     const addNew = new User({
       user: req.body.user,
