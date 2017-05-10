@@ -8,7 +8,7 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 const styles = {
   titleStyle: {
@@ -20,6 +20,11 @@ const styles = {
   },
   toolbarStyle: {
     backgroundColor: '#FFF',
+  },
+  gridList: {
+    width: 'auto',
+    height: 'auto',
+    overflowY: 'auto',
   },
 }
 
@@ -33,6 +38,19 @@ const DashBoard = () => (
           <ToolbarTitle text="Majestic Owls" />
         </ToolbarGroup>
       </Toolbar>
+    </MuiThemeProvider>
+    <MuiThemeProvider>
+      <RaisedButton 
+        label= 'Dashboard'
+      />
+    </MuiThemeProvider>
+    <MuiThemeProvider>
+      <GridList
+        cellHeight={400} 
+        cols = {6}
+        style={styles.gridList}
+      >
+      </GridList>
     </MuiThemeProvider>
   </div>
 )
