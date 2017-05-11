@@ -120,7 +120,7 @@ class DashBoard extends React.Component {
               <Link to='/'
                 style={styles.homeStyle}
               >
-                <ToolbarTitle 
+                <ToolbarTitle
                 text="Flighty McFlightFace"
                 style={styles.whiteTextStyle}
                 />
@@ -149,8 +149,8 @@ class DashBoard extends React.Component {
           </GridList>
         </MuiThemeProvider>
         <MuiThemeProvider>
-          <FloatingActionButton 
-            style={styles.fab} 
+          <FloatingActionButton
+            style={styles.fab}
             backgroundColor = {amber500}
             label="Search"><ContentAdd />
           </FloatingActionButton>
