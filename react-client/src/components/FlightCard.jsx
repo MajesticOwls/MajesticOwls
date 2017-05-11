@@ -1,5 +1,11 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {GridList, GridTile} from 'material-ui/GridList';
+import IconButton from 'material-ui/IconButton';
+import Subheader from 'material-ui/Subheader';
+import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import testData from '../../../test/testdata.js'
 
 
  class FlightCard extends React.Component {
@@ -8,7 +14,7 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
     this.state = {
     }
   }
-  
+
   render() {
     const styles = {
       gridList: {
@@ -23,7 +29,19 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
     }
     return (
         <div>
-        hi
+        <MuiThemeProvider>
+          <Card
+            style={styles.card}
+          >
+            <GridList
+              cellHeight={180}
+              style={styles.gridList}
+            >
+              <Subheader>Sights</Subheader>
+
+            </GridList>
+          </Card>
+        </MuiThemeProvider>
         </div>
     )
   }
