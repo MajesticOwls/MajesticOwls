@@ -28,6 +28,25 @@ class DashBoard extends React.Component {
     this.state = {
     }
   }
+
+  searchYelp(location, callback) {
+    $.ajax({
+      url: 'https://api.yelp.com/v3/businesses/search',
+      type: 'GET',
+      data: {
+        term: 'food',
+        location: location || 'San Francisco',
+        sort_by: 'rating'
+      },
+      headers: {
+        Authorization: `Bearer ${process.env.YELP_TOKEN}`
+      }
+    })
+    .done((data) => {
+      callback(data);
+    });
+  }
+
   render() {
     const styles = {
       titleStyle: {
