@@ -8,8 +8,6 @@ import FoodCard from './FoodCard.jsx';
 import SightsCard from './SightsCard.jsx';
 import WeatherCard from './WeatherCard.jsx';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import GridList from 'material-ui/GridList';
-import GoogleButton from 'react-google-button'
 import {
   BrowserRouter as Router,
   Route,
@@ -48,7 +46,7 @@ class DashBoard extends React.Component {
       },
     }
     return(
-      <div> 
+      <div>
         <MuiThemeProvider>
           <Toolbar
             style = {styles.toolbarStyle}>
@@ -57,7 +55,7 @@ class DashBoard extends React.Component {
             </ToolbarGroup>
             <ToolbarGroup style={styles.signOutStyle}>
               <Link to='/'>
-                <FlatButton 
+                <FlatButton
                   label="Sign Out"
                 />
               </Link>
@@ -66,7 +64,7 @@ class DashBoard extends React.Component {
         </MuiThemeProvider>
         <MuiThemeProvider>
           <GridList
-            cellHeight={400} 
+            cellHeight={400}
             cols = {6}
             style={styles.gridList}
           >
