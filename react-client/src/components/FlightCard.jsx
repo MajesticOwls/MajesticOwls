@@ -6,7 +6,8 @@ const styles = {
 }
 
 const FlightCard = () => (
-  <div></div>
+  <div>
+  </div>
 )
 
 export default FlightCard;

@@ -7,6 +7,7 @@ import FlightCard from './FlightCard.jsx';
 import FoodCard from './FoodCard.jsx';
 import SightsCard from './SightsCard.jsx';
 import WeatherCard from './WeatherCard.jsx';
+import GridList from 'material-ui/GridList';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import GridList from 'material-ui/GridList';
 import GoogleButton from 'react-google-button';
