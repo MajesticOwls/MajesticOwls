@@ -52,6 +52,14 @@ app.get('/auth/google/callback',
     res.redirect('/dashboard');
   });
 
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../react-client/dist/index.html'));
+})
+
+app.get('/sign-in', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../react-client/dist/index.html'));
+})
+
 
 //FOR ADDING DATA INTO THE DATEBASE
 app.post('/database/save', (req,res) => {
