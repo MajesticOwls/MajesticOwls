@@ -7,9 +7,12 @@ import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 const styles = {
+  cardHeader: {
+    height: '20%',
+  },
   gridList: {
     width: '100%',
-    height: 400,
+    height: '80%',
     overflowY: 'auto',
   },
   card: {
@@ -62,28 +65,30 @@ const testData = [
 
 const SightsCard = () => (
   <div>
-    <MuiThemeProvider>
-      <Card
-        style={styles.card}
+    <Card
+      style={styles.card}
+    >
+      <CardHeader
+        title="Places of Interest"
+        avatar="images/jsa-128.jpg"
+        style={styles.cardHeader}
+      />
+      <GridList
+        cellHeight={180}
+        style={styles.gridList}
       >
-        <Subheader>Sights</Subheader>
-        <GridList
-          cellHeight={180}
-          style={styles.gridList}
-        >
-          {testData.map((tile) => (
-            <GridTile
-              key={tile.img}
-              title={tile.title}
-              subtitle={<b>{tile.author}</b>}
-              actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
-            >
-              <img src={tile.img} />
-            </GridTile>
-          ))}
-        </GridList>
-      </Card>
-    </MuiThemeProvider>
+        {testData.map((tile) => (
+          <GridTile
+            key={tile.img}
+            title={tile.title}
+            subtitle={<b>{tile.author}</b>}
+            actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+          >
+            <img src={tile.img} />
+          </GridTile>
+        ))}
+      </GridList>
+    </Card>
   </div>
 )
 

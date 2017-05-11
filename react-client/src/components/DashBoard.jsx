@@ -11,7 +11,7 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui
 import GridList from 'material-ui/GridList';
 import GoogleButton from 'react-google-button';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentSearch from 'material-ui/svg-icons/action/search';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 import {
   BrowserRouter as Router,
   Route,
@@ -112,7 +112,7 @@ class DashBoard extends React.Component {
           <FloatingActionButton 
             style={styles.fab} 
             backgroundColor = {amber500}
-            label="Search"><ContentSearch />
+            label="Search"><ContentAdd />
           </FloatingActionButton>
         </MuiThemeProvider>
       </div>
