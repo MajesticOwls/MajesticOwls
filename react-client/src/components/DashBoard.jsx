@@ -3,11 +3,14 @@ import {render} from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
+<<<<<<< HEAD
 import FlightCard from './FlightCard.jsx';
 import FoodCard from './FoodCard.jsx';
 import SightsCard from './SightsCard.jsx';
 import WeatherCard from './WeatherCard.jsx';
 import GridList from 'material-ui/GridList';
+=======
+>>>>>>> dad7396fcb2452827e215ab8c20107d6d6223845
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import {
   BrowserRouter as Router,
@@ -70,6 +73,7 @@ class DashBoard extends React.Component {
             style={styles.gridList}
           >
 
+<<<<<<< HEAD
           </GridList>
         </MuiThemeProvider>
       </div>
@@ -77,4 +81,37 @@ class DashBoard extends React.Component {
   }
 }
 
+=======
+const DashBoard = () => (
+  <div>
+
+    <MuiThemeProvider>
+      <Toolbar
+        style = {styles.toolbarStyle}>
+        <ToolbarGroup firstChild={true} style={styles.titleStyle}>
+          <ToolbarTitle text="Majesti" />
+        </ToolbarGroup>
+        <ToolbarGroup style={styles.signOutStyle}>
+          <Link to='/'>
+            <FlatButton
+              label="Sign Out"
+            />
+          </Link>
+        </ToolbarGroup>
+      </Toolbar>
+    </MuiThemeProvider>
+    <MuiThemeProvider>
+      <GridList
+        cellHeight={400}
+        cols = {6}
+        style={styles.gridList}
+      >
+      </GridList>
+    </MuiThemeProvider>
+  </div>
+)
+
+
+
+>>>>>>> dad7396fcb2452827e215ab8c20107d6d6223845
 export default DashBoard;
