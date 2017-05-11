@@ -39,7 +39,7 @@ class DashBoard extends React.Component {
         sort_by: 'rating'
       },
       headers: {
-        Authorization: `Bearer ${process.env.YELP_TOKEN}`
+        Authorization: `Bearer ${process.env.YELP_TOKEN || YELP_TOKEN}`
       }
     })
     .done((data) => {
