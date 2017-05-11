@@ -67,6 +67,9 @@ class DashBoard extends React.Component {
         zIndex: 100,
         position: 'fixed',
       },
+      homeStyle: {
+        textDecoration: 'none',
+      },
     }
     return(
       <div>
@@ -74,10 +77,14 @@ class DashBoard extends React.Component {
           <Toolbar
             style = {styles.toolbarStyle}>
             <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-              <ToolbarTitle 
-                text="Majestic Owls" 
+              <Link to='/'
+                style={styles.homeStyle}
+              >
+                <ToolbarTitle 
+                text="Flighty McFlightFace"
                 style={styles.whiteTextStyle}
-              />
+                />
+              </Link>
             </ToolbarGroup>
             <ToolbarGroup style={styles.signOutStyle}>
               <Link to='/'>

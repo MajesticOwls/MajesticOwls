@@ -41,15 +41,15 @@ class App extends React.Component {
         bottom: 'auto',
         position:'fixed',
       },
-      signIn: {
+      whiteTextStyle: {
         color: '#FFF',
       },
       toolbarStyle: {
         backgroundColor: indigo500,
       },
-      toolbarTitleStyle: {
-        color: '#FFF',
-      }
+      homeStyle: {
+        textDecoration: 'none',
+      },
     }
 
     const Home = () => (
@@ -58,15 +58,19 @@ class App extends React.Component {
             <Toolbar
               style = {styles.toolbarStyle}>
               <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-                <ToolbarTitle 
-                  text="Majestic Owls"
-                  style={styles.toolbarTitleStyle}
-                />
+                <Link to='/'
+                  style={styles.homeStyle}
+                >
+                  <ToolbarTitle 
+                  text="Flighty McFlightFace"
+                  style={styles.whiteTextStyle}
+                  />
+                </Link>
               </ToolbarGroup>
               <ToolbarGroup style={styles.signInStyle}>
                 <Link to='/sign-in'>
                   <FlatButton
-                    style={styles.signIn}
+                    style={styles.whiteTextStyle}
                     label="Sign In"
                   />
                 </Link>

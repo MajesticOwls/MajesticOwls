@@ -36,6 +36,9 @@ const styles = {
   toolbarStyle: {
     backgroundColor: indigo500,
   },
+  homeStyle: {
+    textDecoration: 'none',
+  },
 }
 
 const SignIn = () => (
@@ -45,10 +48,14 @@ const SignIn = () => (
         style = {styles.toolbarStyle}
       >
         <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-          <ToolbarTitle 
+          <Link to='/'
+            style={styles.homeStyle}
+          >
+            <ToolbarTitle 
             text="Majestic Owls"
             style={styles.whiteTextStyle}
-          />
+            />
+          </Link>
         </ToolbarGroup>
       </Toolbar>
     </MuiThemeProvider>
