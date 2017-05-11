@@ -1,4 +1,3 @@
-
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -8,11 +7,6 @@ const User = require('../database/index');
 const app = express();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
-const react = require('react');
-const ReactDomServer = require('react-dom/server');
-
-import Dashboard from '../react-client/src/components/DashBoard';
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
@@ -55,8 +49,7 @@ app.get('/auth/google',
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/sign-in' }),
   (req, res) => {
-    const html = ReactDomServer.renderToString(react.createElement(Dashboard));
-    return res.send(html);
+    res.redirect('/dashboard');
   });
 
 app.get('/dashboard', (req, res) => {
@@ -66,7 +59,6 @@ app.get('/dashboard', (req, res) => {
 app.get('/sign-in', (req, res) => {
   res.sendFile(path.join(__dirname, '/../react-client/dist/index.html'));
 })
-
 
 
 //FOR ADDING DATA INTO THE DATEBASE
