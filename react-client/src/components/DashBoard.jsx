@@ -4,8 +4,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import GridList from 'material-ui/GridList';
-import GoogleButton from 'react-google-button'
 import {
   BrowserRouter as Router,
   Route,
@@ -38,16 +36,17 @@ const styles = {
 }
 
 const DashBoard = () => (
-  <div> 
+  <div>
+
     <MuiThemeProvider>
       <Toolbar
         style = {styles.toolbarStyle}>
         <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-          <ToolbarTitle text="Majestic Owls" />
+          <ToolbarTitle text="Majesti" />
         </ToolbarGroup>
         <ToolbarGroup style={styles.signOutStyle}>
           <Link to='/'>
-            <FlatButton 
+            <FlatButton
               label="Sign Out"
             />
           </Link>
@@ -56,7 +55,7 @@ const DashBoard = () => (
     </MuiThemeProvider>
     <MuiThemeProvider>
       <GridList
-        cellHeight={400} 
+        cellHeight={400}
         cols = {6}
         style={styles.gridList}
       >
@@ -64,5 +63,7 @@ const DashBoard = () => (
     </MuiThemeProvider>
   </div>
 )
+
+
 
 export default DashBoard;

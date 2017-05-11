@@ -16,12 +16,13 @@ import {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-    }
-  }
-  componentDidMount() {
 
   }
+  componentWillMount() {
+
+  }
+
+
   render() {
     const styles = {
       titleStyle: {
@@ -45,21 +46,21 @@ class App extends React.Component {
 
     const Home = () => (
       <div>
-        <MuiThemeProvider>
-          <Toolbar
-            style = {styles.toolbarStyle}>
-            <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-              <ToolbarTitle text="Majestic Owls" />
-            </ToolbarGroup>
-            <ToolbarGroup style={styles.signInStyle}>
-              <Link to='/sign-in'>
-                <FlatButton 
-                  label="Sign In"
-                />
-              </Link>
-            </ToolbarGroup>
-          </Toolbar>
-        </MuiThemeProvider>
+          <MuiThemeProvider>
+            <Toolbar
+              style = {styles.toolbarStyle}>
+              <ToolbarGroup firstChild={true} style={styles.titleStyle}>
+                <ToolbarTitle text="Majestic Owls" />
+              </ToolbarGroup>
+              <ToolbarGroup style={styles.signInStyle}>
+                <Link to='/sign-in'>
+                  <FlatButton
+                    label="Sign In"
+                  />
+                </Link>
+              </ToolbarGroup>
+            </Toolbar>
+          </MuiThemeProvider>
       </div>
     )
 
