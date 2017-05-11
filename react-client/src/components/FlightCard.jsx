@@ -1,13 +1,33 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
-const styles = {
-  // Put any inline css styles here.
+
+ class FlightCard extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+    }
+  }
+  
+  render() {
+    const styles = {
+      gridList: {
+        width: 500,
+        height: 400,
+        overflowY: 'auto',
+      },
+      card: {
+        width:500,
+        height: 400,
+      }
+    }
+    return (
+        <div>
+        hi
+        </div>
+    )
+  }
 }
 
-const FlightCard = () => (
-  <div>
-  </div>
-)
 
 export default FlightCard;
