@@ -74,8 +74,8 @@ class DashBoard extends React.Component {
           <Toolbar
             style = {styles.toolbarStyle}>
             <ToolbarGroup firstChild={true} style={styles.titleStyle}>
-              <ToolbarTitle 
-                text="Majestic Owls" 
+              <ToolbarTitle
+                text="Majestic Owls"
                 style={styles.whiteTextStyle}
               />
             </ToolbarGroup>
@@ -102,8 +102,8 @@ class DashBoard extends React.Component {
           </GridList>
         </MuiThemeProvider>
         <MuiThemeProvider>
-          <FloatingActionButton 
-            style={styles.fab} 
+          <FloatingActionButton
+            style={styles.fab}
             backgroundColor = {amber500}
             label="Search"><ContentSearch />
           </FloatingActionButton>
