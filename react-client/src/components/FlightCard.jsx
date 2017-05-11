@@ -18,28 +18,21 @@ import testData from '../../../test/testdata.js'
   render() {
     const styles = {
       gridList: {
-        width: 500,
+        width: '100%',
         height: 400,
         overflowY: 'auto',
       },
       card: {
-        width:500,
+        width: '100%',
         height: 400,
       }
     }
     return (
         <div>
         <MuiThemeProvider>
-          <Card
-            style={styles.card}
-          >
-            <GridList
-              cellHeight={180}
-              style={styles.gridList}
-            >
-              <Subheader>Sights</Subheader>
-
-            </GridList>
+          <Card style={styles.card}>
+               <Subheader>Flight Info</Subheader>
+                
           </Card>
         </MuiThemeProvider>
         </div>
