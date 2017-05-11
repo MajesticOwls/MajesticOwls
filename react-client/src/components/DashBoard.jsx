@@ -26,24 +26,27 @@ class DashBoard extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      food: []
     }
   }
 
-  searchYelp(location, callback) {
+  searchYelp(location) {
     $.ajax({
       url: 'https://api.yelp.com/v3/businesses/search',
       type: 'GET',
       data: {
         term: 'food',
-        location: location || 'San Francisco',
+        location: this.props.location || 'San Francisco',
         sort_by: 'rating'
       },
       headers: {
-        Authorization: `Bearer ${process.env.YELP_TOKEN || YELP_TOKEN}`
+        Authorization: `Bearer ${process.env.YELP_TOKEN || window.YELP_TOKEN}`
       }
     })
     .done((data) => {
-      callback(data);
+      this.setState({
+        food: data
+      })
     });
   }
 
