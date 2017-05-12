@@ -40,7 +40,7 @@ const FoodCard = (props) => (
     >
       {props.food.map((restaurant) => (
         <ListItem
-          key={restaurant.id}
+          key={restaurant.place_id}
           leftAvatar={<Avatar/>}
           primaryText={restaurant.name}
           secondaryText={restaurant.rating}

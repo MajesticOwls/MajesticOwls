@@ -46,7 +46,7 @@ const SightsCard = (props) => (
       >
         {props.sights.map((sight) => (
           <GridTile
-            key={sight.img}
+            key={sight.place_id}
             title={sight.name}
             subtitle={<b>{sight.formatted_address}</b>}
             actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
