@@ -145,8 +145,6 @@ class DashBoard extends React.Component {
               >
                 <ToolbarTitle
                 text="Flighty McFlightFace"
-              <ToolbarTitle
-                text="Majestic Owls"
                 style={styles.whiteTextStyle}
                 />
               </Link>
