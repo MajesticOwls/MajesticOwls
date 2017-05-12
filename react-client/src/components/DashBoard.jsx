@@ -22,7 +22,6 @@ import {
   amber500,
 } from 'material-ui/styles/colors';
 import $ from 'jquery';
-import config from '../config/config.js'
 
 class DashBoard extends React.Component {
   constructor (props) {
@@ -37,7 +36,7 @@ class DashBoard extends React.Component {
   }
 
   searchGoogle(location) {
-    $.getJSON('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/textsearch/json?query=new+york+city+point+of+interest&language=en&key=' + config.GOOGLE_KEY)
+    $.getJSON('https://crossorigin.me/https://maps.googleapis.com/maps/api/place/textsearch/json?query=new+york+city+point+of+interest&language=en&key=' + require('../config/config').GOOGLE_KEY)
       .then((data) => {
         console.log('data', data);
         this.setState({
