@@ -81,13 +81,14 @@ class DashBoard extends React.Component {
         sort_by: 'rating'
       },
       headers: {
-        Authorization: `Bearer ${process.env.YELP_TOKEN || window.YELP_TOKEN}`
+        Authorization: `Bearer ${process.env.YELP_TOKEN || require('../config/config').YELP_TOKEN}`
       }
     })
     .done((data) => {
       this.setState({
         food: data
       })
+      console.log(data);
     });
   }
 
@@ -167,7 +168,7 @@ class DashBoard extends React.Component {
           >
             <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
             <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
-            <MuiThemeProvider><FoodCard/></MuiThemeProvider>
+            <MuiThemeProvider><FoodCard food={this.food}/></MuiThemeProvider>
             <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
           </GridList>
         </MuiThemeProvider>
