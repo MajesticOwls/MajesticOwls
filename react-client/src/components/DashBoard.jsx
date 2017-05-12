@@ -74,7 +74,6 @@ class DashBoard extends React.Component {
       this.setState({
         food: data.results
       })
-      console.log('food', data.results);
     });
   }
 
