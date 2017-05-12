@@ -30,8 +30,10 @@ class DashBoard extends React.Component {
     this.state = {
       food: [],
       sights: [],
+      flight: {}
     }
     this.searchGoogle = this.searchGoogle.bind(this);
+    this.flightSearch = this.flightSearch.bind(this);
   }
 
   searchGoogle(location) {
@@ -44,8 +46,29 @@ class DashBoard extends React.Component {
       });
   }
 
+  flightSearch(airline,flight,month,day,year) {
+    return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/AA/102/arr/2017/5/11?appId=' + config.FLIGHTSTATUS.API_KEY + '&appKey=' + config.FLIGHTSTATUS.APP_KEY + '&utc=false')
+        .then((data) => {
+          console.log('data',data);
+            var obj = {
+              departurePort: data.appendix.airports[0].fs,
+              arrivalPort: data.appendix.airports[1].fs,
+              departureCity: data.appendix.airports[0].city,
+              arrivalCity: data.appendix.airports[1].city,
+              leaveTime: data.flightStatuses[0].departureDate.dateLocal,
+              airline: data.appendix.airlines[0].name
+            };
+            console.log('obj', obj)
+          this.setState({
+              flight: obj
+          });
+        });
+
+      }
+
   componentDidMount() {
     this.searchGoogle();
+    this.flightSearch();
   }
 
   searchYelp(location) {
@@ -143,7 +166,7 @@ class DashBoard extends React.Component {
             style={styles.gridList}
           >
             <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
-            <MuiThemeProvider><FlightCard/></MuiThemeProvider>
+            <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
             <MuiThemeProvider><FoodCard/></MuiThemeProvider>
             <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
           </GridList>

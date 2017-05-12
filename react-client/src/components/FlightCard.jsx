@@ -5,46 +5,14 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
-import testData from '../../../test/testdata.js';
-import $ from 'jquery';
+
 
 
  class FlightCard extends React.Component {
   constructor (props) {
     super(props);
-    this.state = {
-      departurePort: null,
-      arrivalPort: null,
-      departureCity: null,
-      arrivalCity: null,
-      leaveTime: null,
-      airline: null
-
-    }
   }
 
-  componentWillMount() {
-    this.flightSearch();
-  }
-
-  flightSearch(airline,flight,month,day,year) {
-    return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/AA/102/arr/2017/5/11?appId=a187a7bc&appKey=e276d93bc5207238c1eacdd21bec0653&utc=false')
-        .then((data) => {
-          console.log('data',data);
-          this.setState({
-              departurePort: data.appendix.airports[0].fs,
-              arrivalPort: data.appendix.airports[1].fs,
-              departureCity: data.appendix.airports[0].city,
-              arrivalCity: data.appendix.airports[1].city,
-              leaveTime: data.flightStatuses[0].departureDate.dateLocal,
-
-              airline: data.appendix.airlines[0].name
-
-
-          });
-        });
-
-      }
 
   render() {
     const styles = {
@@ -58,15 +26,15 @@ import $ from 'jquery';
         height: 400,
       }
     }
+    console.log(this.props.flight);
     return (
         <div>
         <MuiThemeProvider>
           <Card style={styles.card}>
                <Subheader>Flight Info</Subheader>
-               <ul>{this.state.departurePort} | {this.state.departureCity}  TO {this.state.arrivalPort} | {this.state.arrivalCity}</ul>
-               <ul>{this.state.arrival}</ul>
-               <ul>{this.state.leaveTime}</ul>
-               <ul>{this.state.airline}</ul>
+               <ul>{this.props.flight.departurePort} | {this.props.flight.departureCity}  TO {this.props.flight.arrivalPort} | {this.props.flight.arrivalCity}</ul>
+               <ul>{this.props.flight.leaveTime}</ul>
+               <ul>{this.props.flight.airline}</ul>
 
           </Card>
         </MuiThemeProvider>
