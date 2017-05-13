@@ -9,22 +9,23 @@ import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff';
 import Avatar from 'material-ui/Avatar';
 import Arrow from 'material-ui/svg-icons/navigation/arrow-forward';
 import Divider from 'material-ui/Divider';
-
-
 import {
   grey500, white, teal500,
 } from 'material-ui/styles/colors';
+
 
  class FlightCard extends React.Component {
   constructor (props) {
     super(props);
 
   }
+
+
   render() {
     const styles = {
       gridList: {
         width: '100%',
-        height: '40%',
+        height: 400,
         overflowY: 'auto',
       },
       card: {
@@ -50,6 +51,7 @@ import {
       },
       avatar1:{
         align: 60,
+
       },
       cardHeader: {
         height: '20%',
@@ -60,23 +62,32 @@ import {
         left: '50%',
         transform: 'translate(-50%, -50%)',
       },
+
+
     }
+
+
+
 
     return (
       <div>
         <MuiThemeProvider>
+
+
           <Card style={styles.card}>
+
             <CardHeader
               title="Flight Information"
-              avatar={<Avatar icon={<ActionFlightTakeoff />} 
-                style={styles.avatar} 
+              avatar={<Avatar icon={<ActionFlightTakeoff />}
+                style={styles.avatar}
                 color={white}/>}
               style={styles.cardHeader}
             />
             <Divider/>
-            <CardTitle 
-              title={this.props.flight.airline} 
+            <CardTitle
+              title={this.props.flight.airline}
               subtitle={'Leaving at: ' + this.props.flight.leaveTime}
+
             />
             <GridList
               style = {styles.gridList}
@@ -102,8 +113,6 @@ import {
                 </CardHeader>
               </GridTile>
             </GridList>
-            <CardHeader
-              title="On-Time" />
           </Card>
         </MuiThemeProvider>
       </div>

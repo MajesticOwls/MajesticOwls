@@ -14,7 +14,8 @@ import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import Divider from 'material-ui/Divider';
-import SignOutToolBar from './SignOutToolBar.jsx'
+import SignOutToolBar from './SignOutToolBar.jsx';
+import $ from 'jquery';
 
 
 class NewTrip extends React.Component {
@@ -26,6 +27,7 @@ class NewTrip extends React.Component {
       airline: 'AL',
       flightNumber: '',
       finalDestination: '',
+      date:''
     }
     this.handleNext = this.handleNext.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
@@ -49,7 +51,7 @@ class NewTrip extends React.Component {
       this.setState({stepIndex: stepIndex - 1});
     }
   };
-  handleChange (event, index, value) { 
+  handleChange (event, index, value) {
     this.setState({airline: value});
   };
   handleDate (event, date) {
@@ -113,7 +115,7 @@ class NewTrip extends React.Component {
         return (<MuiThemeProvider>
                   <TextField
                     floatingLabelText="Destination Address"
-                    onChange={this.handleFlightNumber}
+                    onChange={this.handleFinalDestination}
                     hintText="944 Market Street San Francisco"
                     floatingLabelFixed={true}
                   />
@@ -123,6 +125,31 @@ class NewTrip extends React.Component {
         return 'You\'ve somehow found a bug in our code, well done!';
     }
   };
+
+
+saveData() {
+  var context = this;
+  console.log(context.state.airline);
+    $.ajax({
+      type: 'POST',
+      url: '/database/save',
+      contentType: 'application/JSON',
+      data: JSON.stringify({
+          airline: context.state.airline,
+          flightNumber: context.state.flightNumber,
+          finalDestination: context.state.finalDestination,
+          date: context.state.date
+            })
+          })
+          .done(function(data) {
+
+          console.log('POST Successful');
+          })
+          .fail(function(err) {
+          console.error('POST failed');
+        })
+  };
+
   render () {
     const {finished, stepIndex} = this.state;
     const styles = {
@@ -148,9 +175,10 @@ class NewTrip extends React.Component {
             </Stepper>
           </MuiThemeProvider>
           <div style={styles.contentStyle}>
-            {finished ? (
-              <Redirect push to="/dashboard" />
-            ) : (
+
+            {finished ? ( this.saveData() ||
+              <Redirect push to="/dashboard" />) : (
+
               <div>
                 {this.getStepContent(stepIndex)}
                 <div style={{marginTop: 12}}>
