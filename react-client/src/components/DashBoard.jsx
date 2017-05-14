@@ -34,14 +34,20 @@ class DashBoard extends React.Component {
       food: [],
       sights: [],
       flight: {},
+<<<<<<< HEAD
       flightsArray:[],
       index: 0,
+=======
+      flightsArray: [],
+      weather: []
+>>>>>>> (feat) Add searchWeather function to dashboard
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
     this.databaseFlightSearch = this.databaseFlightSearch.bind(this);
     this.historyChange = this.historyChange.bind(this);
     this.searchFood = this.searchFood.bind(this);
+    this.searchWeather = this.searchWeather.bind(this);
   }
 
   searchGoogle(location) {
@@ -144,6 +150,17 @@ class DashBoard extends React.Component {
     .done((data) => {
       this.setState({
         food: data
+      })
+    })
+  }
+
+  searchWeather(location) {
+    $.get('/weather', {
+      location: location
+    })
+    .done((data) => {
+      this.setState({
+        weather: data
       })
     })
   }
