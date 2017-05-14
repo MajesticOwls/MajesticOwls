@@ -3,7 +3,7 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import {List, ListItem} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import MapsLocalDining from 'material-ui/svg-icons/maps/local-dining';
-import {grey500, red500} from 'material-ui/styles/colors';
+import {red500} from 'material-ui/styles/colors';
 import Divider from 'material-ui/Divider';
 
 const styles = {
@@ -27,29 +27,29 @@ const styles = {
 const FoodCard = (props) => (
   <div>
     <Card style={styles.card}>
-    <CardHeader
-      title="Food"
-      avatar={<Avatar
-        icon={<MapsLocalDining />}
-        style={styles.avatar}
-      />}
-      style={styles.cardHeader}
-    />
-    <Divider/>
-    <List
-      style={styles.list}
-    >
-      {props.food.map((restaurant) => (
-        <ListItem
-          key={restaurant.place_id}
-          leftAvatar={<Avatar src={restaurant.photo} />}
-          primaryText={restaurant.name}
-          secondaryText={restaurant.formatted_address + ' · Rating:' + restaurant.rating}
-          target="_blank"
-          href={restaurant.url}
-        />
-      ))}
-    </List>
+      <CardHeader
+        title="Food"
+        avatar={<Avatar
+          icon={<MapsLocalDining />}
+          style={styles.avatar}
+        />}
+        style={styles.cardHeader}
+      />
+      <Divider/>
+      <List
+        style={styles.list}
+      >
+        {props.food.map((restaurant) => (
+          <ListItem
+            key={restaurant.place_id}
+            leftAvatar={<Avatar src={restaurant.photo} />}
+            primaryText={restaurant.name}
+            secondaryText={restaurant.formatted_address + ' · Rating:' + restaurant.rating}
+            target="_blank"
+            href={restaurant.url}
+          />
+        ))}
+      </List>
     </Card>
   </div>
 )
