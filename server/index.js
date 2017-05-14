@@ -173,10 +173,8 @@ app.get('/food', (req, res) => {
   });
 });
 
-app.post('/flightStatus', (req,res) => {
-  console.log(req.body);
-  request.get('https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+req.body.airline+'/'+req.body.flight+'/arr/'+req.body.year+'/'+req.body.day+'/'+req.body.month+'?appId=' + require('./config').FLIGHT_API_KEY + '&appKey=' + require('./config').FLIGHT_APP_KEY + '&utc=false',
-
+app.get('/flightStatus', (req, res) => {
+  request.get('https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+req.query.airline+'/'+req.query.flight+'/arr/'+req.query.year+'/'+req.query.day+'/'+req.query.month+'?appId=' + require('./config').FLIGHT_API_KEY + '&appKey=' + require('./config').FLIGHT_APP_KEY + '&utc=false',
   (error, response, body) => {
     if (error) console.error(error);
     res.send(JSON.parse(body));
@@ -185,7 +183,7 @@ app.post('/flightStatus', (req,res) => {
 
 
 //FOR ADDING DATA INTO THE DATEBASE
-app.post('/database/save', (req,res) => {
+app.post('/database/save', (req, res) => {
 
     var dateTotal = req.body.date;
     var monthOnly;

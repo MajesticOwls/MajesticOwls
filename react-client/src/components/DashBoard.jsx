@@ -80,22 +80,15 @@ class DashBoard extends React.Component {
     })
   }
 
-  flightSearch(airline,flight,month,day,year) {
-    console.log('airline', airline);
-    $.ajax({
-      type:'POST',
-      url: '/flightStatus',
-      contentType: 'application/JSON',
-      data: JSON.stringify({
-        airline: airline,
-        flight: flight,
-        month: month,
-        day: day,
-        year: year
-      })
+  flightSearch(airline, flight, month, day, year) {
+    $.get('/flightStatus', {
+      airline: airline,
+      flight: flight,
+      month: month,
+      day: day,
+      year: year
     })
     .done((data) => {
-      console.log('data',data);
       var dateTime = data.flightStatuses[0].departureDate.dateLocal;
       var newTime;
       var dateOnly;
@@ -218,7 +211,7 @@ class DashBoard extends React.Component {
               onChange={this.historyChange}
               value={this.state.index}>
               {this.state.flightsArray.map((index, ind) => {
-                return <MenuItem value={ind} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
+                return <MenuItem key={ind} value={ind} label={index.Airline + ' ' +index.flight} primaryText={index.Airline + ' ' +index.flight} />
               })}
             </SelectField>
           </MuiThemeProvider>
