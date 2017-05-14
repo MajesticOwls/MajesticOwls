@@ -24,7 +24,17 @@ const styles = {
   }
 }
 
-const WeatherCard = () => (
+const weekdays = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+];
+
+const WeatherCard = (props) => (
   <div>
     <Card style={styles.card}>
       <CardHeader
@@ -39,6 +49,14 @@ const WeatherCard = () => (
       <List
         style={styles.list}
       >
+        {props.weather.map((day) => (
+          <ListItem
+            key={day.time}
+            primaryText={weekdays[new Date(day.time * 1000).getDay()]}
+            secondaryText={<span>{Math.round(day.temperatureMax)} {Math.round(day.temperatureMin)}</span>}
+            rightAvatar={<Avatar icon={<FileCloud />} />}
+          />
+        ))}
       </List>
     </Card>
   </div>

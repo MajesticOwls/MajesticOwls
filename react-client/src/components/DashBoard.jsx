@@ -34,13 +34,9 @@ class DashBoard extends React.Component {
       food: [],
       sights: [],
       flight: {},
-<<<<<<< HEAD
-      flightsArray:[],
-      index: 0,
-=======
       flightsArray: [],
+      index: 0,
       weather: []
->>>>>>> (feat) Add searchWeather function to dashboard
     }
     this.searchGoogle = this.searchGoogle.bind(this);
     this.flightSearch = this.flightSearch.bind(this);
@@ -214,7 +210,7 @@ class DashBoard extends React.Component {
               cellHeight={400}
               cols = {3}
               padding = {25}>
-              <MuiThemeProvider><WeatherCard/></MuiThemeProvider>
+              <MuiThemeProvider><WeatherCard weather={this.state.weather}/></MuiThemeProvider>
               <MuiThemeProvider><FlightCard flight={this.state.flight}/></MuiThemeProvider>
               <MuiThemeProvider><FoodCard food={this.state.food}/></MuiThemeProvider>
               <MuiThemeProvider><SightsCard sights={this.state.sights}/></MuiThemeProvider>
