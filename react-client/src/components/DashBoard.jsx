@@ -136,6 +136,7 @@ class DashBoard extends React.Component {
       this.flightSearch(flight.Airline,flight.flight,flight.month,flight.day,flight.year);
       this.searchGoogle(flight.destination);
       this.searchFood(flight.destination);
+      this.searchWeather(flight.destination);
     });
   }
 
