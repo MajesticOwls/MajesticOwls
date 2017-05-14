@@ -7,8 +7,10 @@ const User = require('../database/index');
 const app = express();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const request = require('request');
 const GooglePlaces = require('googleplaces');
 const GOOGLE_KEY = process.env.GOOGLE_KEY || require('./config').GOOGLE_KEY;
+const DARK_SKY_KEY = process.env.DARK_SKY_KEY || require('./config').DARK_SKY_KEY;
 
 const place = new GooglePlaces(GOOGLE_KEY, 'json');
 
@@ -89,6 +91,23 @@ app.get('/sign-in', (req, res) => {
 app.get('/trip', (req, res) => {
   res.sendFile(path.join(__dirname, '/../react-client/dist/index.html'));
 })
+
+app.get('/weather', (req, res) => {
+  const getCoords = new Promise((resolve, reject) => {
+    request.get(`https://maps.googleapis.com/maps/api/geocode/json?key=${GOOGLE_KEY}&address=${req.query.location || 'San Francisco'}`,
+    (error, response, body) => {
+      if (error) console.error(error);
+      resolve(JSON.parse(body).results[0].geometry.location);
+    });
+  });
+  getCoords.then(coords => {
+    request.get(`https://api.darksky.net/forecast/${DARK_SKY_KEY}/${coords.lat},${coords.lng}?exclude=[minutely,hourly]`,
+    (error, response, body) => {
+      if (error) console.error(error);
+      res.send(JSON.parse(body).daily.data);
+    });
+  });
+});
 
 app.get('/sights', (req, res) => {
   let params = {

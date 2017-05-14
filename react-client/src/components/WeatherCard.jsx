@@ -24,15 +24,8 @@ const styles = {
   }
 }
 
-const weekdays = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday'
-];
+const weekdays = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(' ');
+const months = 'January February March April May June July August September October November December'.split(' ');
 
 const WeatherCard = (props) => (
   <div>
@@ -52,8 +45,8 @@ const WeatherCard = (props) => (
         {props.weather.map((day) => (
           <ListItem
             key={day.time}
-            primaryText={weekdays[new Date(day.time * 1000).getDay()]}
-            secondaryText={<span>{Math.round(day.temperatureMax)} {Math.round(day.temperatureMin)}</span>}
+            primaryText={<div>{weekdays[new Date(day.time * 1000).getDay()]}, {months[new Date(day.time * 1000).getMonth()]} {new Date(day.time * 1000).getDate()}</div>}
+            secondaryText={<div>{Math.round(day.temperatureMax)} {Math.round(day.temperatureMin)}</div>}
             rightAvatar={<Avatar icon={<FileCloud />} />}
           />
         ))}
