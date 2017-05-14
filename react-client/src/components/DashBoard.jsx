@@ -67,6 +67,9 @@ class DashBoard extends React.Component {
         flightsArray:data
       })
       context.flightSearch(data[0].Airline,data[0].flight,data[0].month,data[0].day,data[0].year);
+      context.searchGoogle(data[0].destination);
+      context.searchFood(data[0].destination);
+
       console.log('success GET', data);
       })
     .fail(function(err) {
@@ -75,6 +78,7 @@ class DashBoard extends React.Component {
   }
 
   flightSearch(airline,flight,month,day,year) {
+    console.log('airline', airline);
     return $.getJSON('https://crossorigin.me/https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+airline+'/'+flight+'/arr/'+year+'/'+day+'/'+month+'?appId=' + require('../config/config').FLIGHTSTATUS.API_KEY + '&appKey=' + require('../config/config').FLIGHTSTATUS.APP_KEY + '&utc=false')
     .then((data) => {
       console.log('data',data);
@@ -89,42 +93,6 @@ class DashBoard extends React.Component {
           dateOnly = dateTime.slice(0,i);
           newTime =dateTime.slice(i+1,dateTime.length);
         }
-          hours = newTime.slice(0,2);
-          minutes = newTime.slice(3,5);
-          hours = Number(hours);
-
-          if (hours > 12) {
-              newTime = (Math.floor(hours - 12)).toString()+ ':' + minutes + ' PM'
-          } else {
-              newTime = hours.toString() + ':'+ minutes + ' AM'
-            }
-          var flightDuration = data.flightStatuses[0].flightDurations.scheduledAirMinutes;
-
-          if (flightDuration > 60) {
-            hours = Math.floor(flightDuration / 60);
-            minutes = flightDuration - (hours * 60);
-
-            flightDuration = hours.toString() + ' Hour(s) ' + minutes.toString() + ' Minutes(s)'
-          }
-
-          dateOnly = dateOnly.slice(8,10) + '-' + dateOnly.slice(5,7) + '-' + dateOnly.slice(0,4);
-
-          var obj = {
-              departurePort: data.appendix.airports[0].fs,
-              arrivalPort: data.appendix.airports[1].fs,
-              departureCity: data.appendix.airports[0].city + ', '+data.appendix.airports[0].stateCode,
-              arrivalCity: data.appendix.airports[1].city + ',' + data.appendix.airports[1].stateCode,
-              leaveTime: newTime,
-              flightDuration: flightDuration,
-              airline: data.appendix.airlines[0].name,
-              leaveDate: dateOnly
-
-            };
-
-          this.setState({
-              flight: obj
-          });
-        });
       }
       hours = newTime.slice(0,2);
       minutes = newTime.slice(3,5);
@@ -164,6 +132,8 @@ class DashBoard extends React.Component {
     }, function() {
       var flight = this.state.flightsArray[index];
       this.flightSearch(flight.Airline,flight.flight,flight.month,flight.day,flight.year);
+      this.searchGoogle(flight.destination);
+      this.searchFood(flight.destination);
     });
   }
 
@@ -179,9 +149,7 @@ class DashBoard extends React.Component {
   }
 
   componentDidMount() {
-    this.searchGoogle();
     this.databaseFlightSearch();
-    this.searchFood();
   }
 
   render() {
