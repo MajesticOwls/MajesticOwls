@@ -11,7 +11,8 @@ const request = require('request');
 const GooglePlaces = require('googleplaces');
 const GOOGLE_KEY = process.env.GOOGLE_KEY || require('./config').GOOGLE_KEY;
 const DARK_SKY_KEY = process.env.DARK_SKY_KEY || require('./config').DARK_SKY_KEY;
-
+const FLIGHT_API_KEY = process.env.FLIGHT_API_KEY || require('./config').FLIGHT_API_KEY;
+const FLIGHT_APP_KEY = process.env.FLIGHT_APP_KEY || require('./config').FLIGHT_APP_KEY;
 
 const place = new GooglePlaces(GOOGLE_KEY, 'json');
 
@@ -174,7 +175,7 @@ app.get('/food', (req, res) => {
 });
 
 app.get('/flightStatus', (req, res) => {
-  request.get('https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/'+req.query.airline+'/'+req.query.flight+'/arr/'+req.query.year+'/'+req.query.day+'/'+req.query.month+'?appId=' + require('./config').FLIGHT_API_KEY + '&appKey=' + require('./config').FLIGHT_APP_KEY + '&utc=false',
+  request.get(`https://api.flightstats.com/flex/flightstatus/rest/v2/json/flight/status/${req.query.airline}/${req.query.flight}/arr/${req.query.year}/${req.query.day}/${req.query.month}?appId=${FLIGHT_API_KEY}&appKey=${FLIGHT_APP_KEY}&utc=false`,
   (error, response, body) => {
     if (error) console.error(error);
     res.send(JSON.parse(body));
