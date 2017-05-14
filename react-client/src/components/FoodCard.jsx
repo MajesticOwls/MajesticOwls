@@ -1,7 +1,6 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import {List, ListItem} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
 import MapsLocalDining from 'material-ui/svg-icons/maps/local-dining';
 import {grey500, red500} from 'material-ui/styles/colors';
