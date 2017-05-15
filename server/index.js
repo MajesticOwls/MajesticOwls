@@ -9,7 +9,9 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const request = require('request');
 const GooglePlaces = require('googleplaces');
+const place = new GooglePlaces(GOOGLE_KEY, 'json');
 
+// Config variables
 const G_ID = process.env.G_ID || require('./config').G_ID;
 const G_SECRET = process.env.G_SECRET || require('./config').G_SECRET;
 const G_URL = process.env.G_URL || 'http://localhost:1337/auth/google/callback';
@@ -19,11 +21,8 @@ const DARK_SKY_KEY = process.env.DARK_SKY_KEY || require('./config').DARK_SKY_KE
 const FLIGHT_API_KEY = process.env.FLIGHT_API_KEY || require('./config').FLIGHT_API_KEY;
 const FLIGHT_APP_KEY = process.env.FLIGHT_APP_KEY || require('./config').FLIGHT_APP_KEY;
 
-const place = new GooglePlaces(GOOGLE_KEY, 'json');
-
 app.use(express.static(__dirname + '/../react-client/dist'));
 
-// Passport/Auth
 var userId;
 // check if user has saved data
 var userIdCheck = false;
@@ -41,6 +40,8 @@ var checkUser = () => {
   });
 }
 
+
+// Passport/Auth
 passport.use(new GoogleStrategy({
     clientID: G_ID,
     clientSecret: G_SECRET,
@@ -69,23 +70,11 @@ app.use(session({ secret: SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+// Routes
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/../react-client/dist/index.html'));
 });
-
-
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
-
-app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/sign-in' }),
-  (req, res) => {
-    if (userIdCheck === true) {
-      res.redirect('/dashboard');
-    } else {
-      res.redirect('/trip');
-    }
-  });
 
 app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, '/../react-client/dist/index.html'));
@@ -99,7 +88,23 @@ app.get('/trip', (req, res) => {
   res.sendFile(path.join(__dirname, '/../react-client/dist/index.html'));
 })
 
+// Auth routes
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/sign-in' }),
+  (req, res) => {
+    if (userIdCheck === true) {
+      res.redirect('/dashboard');
+    } else {
+      res.redirect('/trip');
+    }
+  });
+
+// API routes
 app.get('/weather', (req, res) => {
+  // Call Geocoding API for coordinates based on location
   const getCoords = new Promise((resolve, reject) => {
     request.get(`https://maps.googleapis.com/maps/api/geocode/json?key=${GOOGLE_KEY}&address=${req.query.location || 'San Francisco'}`,
     (error, response, body) => {
@@ -108,6 +113,7 @@ app.get('/weather', (req, res) => {
     });
   });
   getCoords.then(coords => {
+    // Use coordinates to get weather forecast
     request.get(`https://api.darksky.net/forecast/${DARK_SKY_KEY}/${coords.lat},${coords.lng}?exclude=[minutely,hourly]`,
     (error, response, body) => {
       if (error) console.error(error);
@@ -120,6 +126,7 @@ app.get('/sights', (req, res) => {
   let params = {
     query: `${req.query.location || 'San Francisco'} attractions`
   };
+  // Call Places API to get array of sights
   const getSights = new Promise((resolve, reject) => {
     place.textSearch(params, (err, res) => {
       if (err) console.error(err);
@@ -127,6 +134,7 @@ app.get('/sights', (req, res) => {
     });
   });
   getSights.then(sights => {
+    // Create array of promises that gets details for each sight
     let promiseArr = sights.map((sight) => {
       return new Promise((resolve, reject) => {
         place.placeDetailsRequest({ placeid: sight.place_id }, (err, res) => {
@@ -141,6 +149,7 @@ app.get('/sights', (req, res) => {
         });
       });
     });
+    // Send response with sights after all promises resolve
     Promise.all(promiseArr).then(sights => {
       res.send(sights);
     });
@@ -152,6 +161,7 @@ app.get('/food', (req, res) => {
     query: req.query.location || 'San Francisco',
     type: 'restaurant'
   };
+  // Call Places API to get array of restaurants
   const getRestaurants = new Promise((resolve, reject) => {
     place.textSearch(params, (err, res) => {
       if (err) console.error(err);
@@ -159,6 +169,7 @@ app.get('/food', (req, res) => {
     });
   });
   getRestaurants.then(restaurants => {
+    // Create array of promises that gets details for each restaurant
     promiseArr = restaurants.map((restaurant) => {
       return new Promise((resolve, reject) => {
         place.placeDetailsRequest({ placeid: restaurant.place_id }, (err, res) => {
@@ -173,6 +184,7 @@ app.get('/food', (req, res) => {
         });
       });
     });
+    // Send response with restaurants after all promises resolve
     Promise.all(promiseArr).then(restaurants => {
       res.send(restaurants);
     });
@@ -188,7 +200,7 @@ app.get('/flightStatus', (req, res) => {
 })
 
 
-//FOR ADDING DATA INTO THE DATEBASE
+// FOR ADDING DATA INTO THE DATEBASE
 app.post('/database/save', (req, res) => {
 
     var dateTotal = req.body.date;
@@ -221,7 +233,7 @@ app.post('/database/save', (req, res) => {
     res.end();
 });
 
-//RETURNS LIST OF THE USERS HISTORY
+// RETURNS LIST OF THE USERS HISTORY
 app.get('/database/return', (req,res) => {
   User.find({user: userId}).limit(10).exec((err,result) => {
     if(err) {
