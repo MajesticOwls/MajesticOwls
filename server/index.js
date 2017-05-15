@@ -9,7 +9,6 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const request = require('request');
 const GooglePlaces = require('googleplaces');
-const place = new GooglePlaces(GOOGLE_KEY, 'json');
 
 // Config variables
 const G_ID = process.env.G_ID || require('./config').G_ID;
@@ -20,6 +19,8 @@ const GOOGLE_KEY = process.env.GOOGLE_KEY || require('./config').GOOGLE_KEY;
 const DARK_SKY_KEY = process.env.DARK_SKY_KEY || require('./config').DARK_SKY_KEY;
 const FLIGHT_API_KEY = process.env.FLIGHT_API_KEY || require('./config').FLIGHT_API_KEY;
 const FLIGHT_APP_KEY = process.env.FLIGHT_APP_KEY || require('./config').FLIGHT_APP_KEY;
+
+const place = new GooglePlaces(GOOGLE_KEY, 'json');
 
 app.use(express.static(__dirname + '/../react-client/dist'));
 
