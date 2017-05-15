@@ -15,6 +15,9 @@ const styles = {
     height: '75%',
     overflowY: 'auto',
   },
+  listItem: {
+    height: 100
+  },
   card: {
     width: '100%',
     height: 400,
@@ -23,7 +26,9 @@ const styles = {
     backgroundColor: lightBlue500,
   },
   icons: {
-    backgroundColor: white
+    backgroundColor: white,
+    height: 70,
+    width: 70
   }
 }
 
@@ -64,6 +69,7 @@ const WeatherCard = (props) => (
             primaryText={<div>{weekdays[new Date(day.time * 1000).getDay()]}, {months[new Date(day.time * 1000).getMonth()]} {new Date(day.time * 1000).getDate()}</div>}
             secondaryText={<div>{Math.round(day.temperatureMax) + '/' + Math.round(day.temperatureMin)}</div>}
             rightAvatar={<Avatar src={icons[day.icon]} style={styles.icons} />}
+            style={styles.listItem}
           />
         ))}
       </List>
