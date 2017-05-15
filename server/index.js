@@ -9,6 +9,11 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const request = require('request');
 const GooglePlaces = require('googleplaces');
+
+const G_ID = process.env.G_ID || require('./config').G_ID;
+const G_SECRET = process.env.G_SECRET || require('./config').G_SECRET;
+const G_URL = process.env.G_URL || 'http://localhost:1337/auth/google/callback';
+const SESSION_SECRET = process.env.SESSION_SECRET || require('./config').SESSION_SECRET;
 const GOOGLE_KEY = process.env.GOOGLE_KEY || require('./config').GOOGLE_KEY;
 const DARK_SKY_KEY = process.env.DARK_SKY_KEY || require('./config').DARK_SKY_KEY;
 const FLIGHT_API_KEY = process.env.FLIGHT_API_KEY || require('./config').FLIGHT_API_KEY;
@@ -37,9 +42,9 @@ var checkUser = () => {
 }
 
 passport.use(new GoogleStrategy({
-    clientID: process.env.G_ID || require('./config').G_ID,
-    clientSecret: process.env.G_SECRET || require('./config').G_SECRET,
-    callbackURL: process.env.G_URL || 'http://localhost:1337/auth/google/callback'
+    clientID: G_ID,
+    clientSecret: G_SECRET,
+    callbackURL: G_URL
   },
   (accessToken, refreshToken, profile, done) => {
       userId = profile.id;
@@ -60,7 +65,7 @@ passport.deserializeUser((id, done) => {
 
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(session({ secret: process.env.SESSION_SECRET || require('./config').SESSION_SECRET }));
+app.use(session({ secret: SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -113,7 +118,7 @@ app.get('/weather', (req, res) => {
 
 app.get('/sights', (req, res) => {
   let params = {
-    query: (req.query.location || 'San Francisco') + ' attractions'
+    query: `${req.query.location || 'San Francisco'} attractions`
   };
   const getSights = new Promise((resolve, reject) => {
     place.textSearch(params, (err, res) => {
@@ -160,7 +165,7 @@ app.get('/food', (req, res) => {
           if (err) console.error(err);
           restaurant.url = res.result.url;
           if ( restaurant.photos ) {
-            restaurant.photo = 'https://maps.googleapis.com/maps/api/place/photo?maxheight=100&photoreference=' + restaurant.photos[0].photo_reference + '&key=' + GOOGLE_KEY;
+            restaurant.photo = `https://maps.googleapis.com/maps/api/place/photo?maxheight=100&photoreference=${restaurant.photos[0].photo_reference}&key=${GOOGLE_KEY}`;
           } else {
             restaurant.photo = '';
           }
