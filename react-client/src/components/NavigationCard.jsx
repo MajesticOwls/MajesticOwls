@@ -60,6 +60,7 @@ import FlatButton from 'material-ui/FlatButton';
               <div
                 style={styles.map}>
                 <GoogleMapReact
+                  bootstrapURLKeys={{ key: process.env.GOOGLE_KEY }}
                   defaultCenter={styles.center}
                   defaultZoom={11}
                 >
