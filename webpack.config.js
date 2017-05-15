@@ -12,7 +12,7 @@ var config = {
   },
   devServer: {
     historyApiFallback: true,
-  }
+  },
   module : {
     loaders : [
       {

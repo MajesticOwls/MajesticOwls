@@ -5,7 +5,6 @@
 
 # Config vars
 server/config.js
-react-client/src/config/config.js
 
 # Webpack bundle
 react-client/dist/bundle.js
