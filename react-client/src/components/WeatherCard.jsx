@@ -3,7 +3,7 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import {List, ListItem} from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import FileCloud from 'material-ui/svg-icons/file/cloud';
-import {lightBlue500, white} from 'material-ui/styles/colors';
+import {lightBlue500, grey500, white} from 'material-ui/styles/colors';
 import Divider from 'material-ui/Divider';
 
 const styles = {
@@ -29,6 +29,13 @@ const styles = {
     backgroundColor: white,
     height: 70,
     width: 70
+  },
+  dateText: {
+    paddingBottom: 16
+  },
+  tempText: {
+    fontWeight: 300,
+    color: grey500
   }
 }
 
@@ -66,11 +73,12 @@ const WeatherCard = (props) => (
         {props.weather.map((day) => (
           <ListItem
             key={day.time}
-            primaryText={<div>{weekdays[new Date(day.time * 1000).getDay()]}, {months[new Date(day.time * 1000).getMonth()]} {new Date(day.time * 1000).getDate()}</div>}
-            secondaryText={<div>{Math.round(day.temperatureMax) + '/' + Math.round(day.temperatureMin)}</div>}
             rightAvatar={<Avatar src={icons[day.icon]} style={styles.icons} />}
             style={styles.listItem}
-          />
+          >
+          <div style={styles.dateText} >{weekdays[new Date(day.time * 1000).getDay()]}, {months[new Date(day.time * 1000).getMonth()]} {new Date(day.time * 1000).getDate()}</div>
+          <h1 style={styles.tempText} >{Math.round(day.temperatureMax) + ' / ' + Math.round(day.temperatureMin)}</h1>
+          </ListItem>
         ))}
       </List>
     </Card>
