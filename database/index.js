@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const findOrCreate = require('mongoose-find-or-create');
-// mongoose.connect('mongodb://localhost/greenfield');
-mongoose.connect('mongodb://group:Hackreactor21@ds127101.mlab.com:27101/greenfield');
+// const findOrCreate = require('mongoose-find-or-create');
+mongoose.connect('mongodb://localhost/greenfield');
+// mongoose.connect('mongodb://group:Hackreactor21@ds127101.mlab.com:27101/greenfield');
 mongoose.Promise = require('bluebird');
 const db = mongoose.connection;
 
@@ -26,7 +26,7 @@ const userSchema = mongoose.Schema({
 
   });
 
-userSchema.plugin(findOrCreate);
+// userSchema.plugin(findOrCreate);
 
 
 const historyStorage = mongoose.model('historyStorage', userSchema);
