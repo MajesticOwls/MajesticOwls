@@ -3,12 +3,19 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const User = require('../database/index');
-const app = express();
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const request = require('request');
 const GooglePlaces = require('googleplaces');
+const router = require('./api/routes.js')
+const User = require('../database/models/user');
+const Destination = require('../database/models/destination');
+const mongoose = require('mongoose')
+// const CronJob = require('cron').CronJob;
+const Cron = require('./cron.js')
+
+
+
 
 // Config variables
 const G_ID = process.env.G_ID || require('./config').G_ID;
@@ -22,7 +29,39 @@ const FLIGHT_APP_KEY = process.env.FLIGHT_APP_KEY || require('./config').FLIGHT_
 
 const place = new GooglePlaces(GOOGLE_KEY, 'json');
 
+const app = express();
+// const findOrCreate = require('mongoose-find-or-create');
+
+//FOR LOCAL DEV UNCOMMENT mongoose connect line below use mongo 
+//ds147421.mlab.com:47421/legacyworldturtles -u group -p Hackreactor1
+// mongoose.connect('mongodb://localhost/greenfield');
+
+mongoose.connect('mongodb://group:Hackreactor1@ds147421.mlab.com:47421/legacyworldturtles');
+
+// mongoose.Promise = require('bluebird');
+mongoose.connection.on('error', () => {
+  console.log('mongoose connection error');
+});
+
+mongoose.connection.once('open', () => {
+  console.log('mongoose connected successfully');
+});
+
+
+
+
+// userSchema.plugin(findOrCreate);
+
+
+
+
 app.use(express.static(__dirname + '/../react-client/dist'));
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+app.use('/', router)
+
 
 var userId;
 // check if user has saved data
@@ -165,12 +204,15 @@ app.get('/food', (req, res) => {
   // Call Places API to get array of restaurants
   const getRestaurants = new Promise((resolve, reject) => {
     place.textSearch(params, (err, res) => {
+      console.log('err', err)
+      console.log('res', res)
       if (err) console.error(err);
       resolve(res.results);
     });
   });
   getRestaurants.then(restaurants => {
     // Create array of promises that gets details for each restaurant
+      // console.log('restaurants', restaurants)
     promiseArr = restaurants.map((restaurant) => {
       return new Promise((resolve, reject) => {
         place.placeDetailsRequest({ placeid: restaurant.place_id }, (err, res) => {

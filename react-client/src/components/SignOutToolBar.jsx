@@ -6,6 +6,12 @@ import {
 } from 'material-ui/styles/colors';
 import {Link} from 'react-router-dom';
 import FlatButton from 'material-ui/FlatButton';
+import LocationForm from './LocationForm.jsx';
+import IconMenu from 'material-ui/IconMenu';
+import IconButton from 'material-ui/IconButton';
+import MenuItem from 'material-ui/MenuItem';
+import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import FontIcon from 'material-ui/FontIcon';
 
 const styles = {
   titleStyle: {
@@ -56,7 +62,24 @@ const SignOutToolBar = () => (
               label="SIGN OUT"
             />
           </Link>
+          <IconMenu
+            iconButtonElement={
+              <IconButton touch={true}>
+                <NavigationExpandMoreIcon />
+              </IconButton>
+            }
+          >
+            <MenuItem primaryText="Download" />
+            <MenuItem primaryText="More Info" />
+          </IconMenu>
         </ToolbarGroup>
+        {/*<ToolbarGroup> 
+          <FontIcon className="muidocs-icon-custom-sort" />
+          <form> 
+            <input type="text" style={styles.signOutStyle} placeholder="Enter Location" />
+  
+          </form> 
+        </ToolbarGroup> */}
       </Toolbar>
     </MuiThemeProvider>
   </div>
