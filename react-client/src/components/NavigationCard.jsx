@@ -12,13 +12,16 @@ import Divider from 'material-ui/Divider';
 import {
   grey500, white, deepPurple500,
 } from 'material-ui/styles/colors';
-import GoogleMapReact from 'google-map-react';
+import { withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
 import FlatButton from 'material-ui/FlatButton';
+import ComboMap from './ComboMap.jsx';
+import $ from 'jquery';
 
 
  class NavigationCard extends React.Component {
   constructor (props) {
     super(props);
+
   }
 
   render() {
@@ -38,7 +41,7 @@ import FlatButton from 'material-ui/FlatButton';
         lng: -122.42,
       },
       map: {
-        height: '65%',
+        height: '68%',
       },
       actions: {
         height: '20%',
@@ -50,8 +53,8 @@ import FlatButton from 'material-ui/FlatButton';
         <Card
           style={styles.card}>
           <CardHeader
-              title="Navigation from Airport"
-              subtitle='Address should go here.'
+              title='Map'
+              subtitle='Your Restaurants + Places'
               avatar={<Avatar icon={<MapNavigation />}
                 style={styles.avatar}
                 color={white}/>}
@@ -59,17 +62,18 @@ import FlatButton from 'material-ui/FlatButton';
               <Divider/>
               <div
                 style={styles.map}>
-                <GoogleMapReact
-                  bootstrapURLKeys={{ key: 'AIzaSyC2opYTjIyzGVfixZEyKmUtsT9igDbiAK4' }}
-                  defaultCenter={styles.center}
-                  defaultZoom={11}
-                >
-                </GoogleMapReact>
+               
+                <ComboMap 
+                  containerElement={
+                    <div style={{ height: `105%` }} />
+                  }
+                  mapElement={
+                    <div style={{ height: `110%` }} />
+                  }
+                  center={this.props.coordinates}
+                  markers={this.props.markers} onMarkerClick={this.props.handleMarkerClick} onMarkerClose={this.props.handleMarkerClose} />
+
               </div>
-              <CardActions style={styles.actions}>
-                <FlatButton primary = {true} label="NAVIGATE" />
-                <FlatButton label="SHARE" />
-              </CardActions>
         </Card>
       </div>
     )
